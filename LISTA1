@@ -169,4 +169,220 @@ int main() {
 ------------------------------------------------------------------------------------------
 5 exercicio
 
+#include <stdio.h>
+
+// Função para contar quantas vezes um valor aparece no vetor
+int contarOcorrencias(int vetor[], int tamanho, int valor) {
+    int contador = 0;
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor[i] == valor) {
+            contador++;
+        }
+    }
+    return contador;
+}
+
+int main() {
+    int n;
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Tamanho inválido do vetor.\n");
+        return 1;
+    }
+
+    int vetor[n];
+    printf("Digite os %d elementos do vetor:\n", n);
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &vetor[i]);
+    }
+
+    printf("Digite o valor que deseja verificar no vetor: ");
+    int valor;
+    scanf("%d", &valor);
+
+    printf("Vetor informado: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", vetor[i]);
+    }
+
+    int ocorrencias = contarOcorrencias(vetor, n, valor);
+    printf("\nO valor %d aparece %d vez(es) no vetor.\n", valor, ocorrencias);
+
+    return 0;
+}
+-----------------------------------------------------------------------------------------------
+6 exercicio
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Função para verificar se o número está presente no vetor e, se estiver, retorna a posição
+int verificarNumero(int vetor[], int tamanho, int numero) {
+    for (int i = 0; i < tamanho; i++) {
+        if (vetor[i] == numero) {
+            return i;
+        }
+    }
+    return -1; // Retorna -1 se o número não estiver presente no vetor
+}
+
+int main() {
+    int n;
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Tamanho inválido do vetor.\n");
+        return 1;
+    }
+
+    int vetor[n];
+
+    // Inicializa o gerador de números aleatórios com o tempo atual
+    srand(time(NULL));
+
+    printf("Vetor gerado aleatoriamente: ");
+    for (int i = 0; i < n; i++) {
+        vetor[i] = rand() % 100; // Gera um número aleatório entre 0 e 99
+        printf("%d ", vetor[i]);
+    }
+
+    printf("\nDigite um número para verificar se está no vetor: ");
+    int numero;
+    scanf("%d", &numero);
+
+    int posicao = verificarNumero(vetor, n, numero);
+    if (posicao != -1) {
+        printf("O número %d está no vetor na posição %d.\n", numero, posicao);
+    } else {
+        printf("O número %d não está no vetor.\n", numero);
+    }
+
+    return 0;
+}
+------------------------------------------------------------------------------------------------------------
+7 exercicio
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+// Função para multiplicar os elementos de mesmo índice dos vetores
+void multiplicarVetores(int vetor1[], int vetor2[], int resultado[], int tamanho) {
+    for (int i = 0; i < tamanho; i++) {
+        resultado[i] = vetor1[i] * vetor2[i];
+    }
+}
+
+int main() {
+    int n;
+    printf("Digite o tamanho dos vetores: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Tamanho inválido dos vetores.\n");
+        return 1;
+    }
+
+    int vetor1[n], vetor2[n], resultado[n];
+
+    // Opção para gerar vetores aleatórios
+    srand(time(NULL));
+    printf("Vetor 1 gerado aleatoriamente: ");
+    for (int i = 0; i < n; i++) {
+        vetor1[i] = rand() % 10; // Gera um número aleatório entre 0 e 9
+        printf("%d ", vetor1[i]);
+    }
+    printf("\n");
+
+    printf("Vetor 2 gerado aleatoriamente: ");
+    for (int i = 0; i < n; i++) {
+        vetor2[i] = rand() % 10; // Gera um número aleatório entre 0 e 9
+        printf("%d ", vetor2[i]);
+    }
+    printf("\n");
+
+    // Multiplica os elementos de mesmo índice e coloca o resultado no vetor "resultado"
+    multiplicarVetores(vetor1, vetor2, resultado, n);
+
+    printf("Vetor resultado da multiplicação: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", resultado[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------------------------
+8 exercicio
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+
+int main() {
+    int n;
+    printf("Digite o número de lançamentos do dado: ");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("Número inválido de lançamentos.\n");
+        return 1;
+    }
+
+    int resultados[n];
+
+    // Inicializa o gerador de números aleatórios com o tempo atual
+    srand(time(NULL));
+
+    printf("Resultados dos lançamentos do dado: ");
+    for (int i = 0; i < n; i++) {
+        resultados[i] = rand() % 6 + 1; // Gera um número aleatório entre 1 e 6 (representando as faces do dado)
+        printf("%d ", resultados[i]);
+    }
+    printf("\n");
+
+    int ocorrencias[6] = {0}; // Inicializa o vetor de ocorrências com zeros
+
+    for (int i = 0; i < n; i++) {
+        ocorrencias[resultados[i] - 1]++; // Incrementa a ocorrência da face correspondente no vetor de ocorrências
+    }
+
+    printf("Número de ocorrências de cada face:\n");
+    for (int i = 0; i < 6; i++) {
+        printf("Face %d: %d vezes\n", i + 1, ocorrencias[i]);
+    }
+
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------------
+9 exercicio
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char vetor[101]; // Vetor para armazenar a string (100 caracteres + o caractere nulo '\0')
+
+    printf("Digite uma string (limite de 100 caracteres): ");
+    fgets(vetor, sizeof(vetor), stdin);
+
+    // Remover o caractere de quebra de linha '\n' gerado pelo fgets
+    int tamanho = strlen(vetor);
+    if (vetor[tamanho - 1] == '\n') {
+        vetor[tamanho - 1] = '\0';
+    }
+
+    printf("Vetor lido em ordem inversa: ");
+    for (int i = strlen(vetor) - 1; i >= 0; i--) {
+        printf("%c", vetor[i]);
+    }
+    printf("\n");
+
+    return 0;
+}
+--------------------------------------------------------------------------------------------
+10 exercicio
 
