@@ -385,4 +385,122 @@ int main() {
 }
 --------------------------------------------------------------------------------------------
 10 exercicio
+#include <stdio.h>
 
+int main() {
+    // Tamanho máximo do vetor DNA
+    int tamanho = 50;
+    
+    // Vetor DNA e seu complementar
+    char dna[tamanho + 1]; // +1 para o caractere nulo '\0' no final da string
+    char complementar[tamanho + 1];
+    
+    // Lendo o vetor DNA
+    printf("Digite o vetor DNA (A, T, C ou G) de no máximo 50 bases: ");
+    scanf("%s", dna);
+    
+    // Gerando o vetor complementar
+    for (int i = 0; dna[i] != '\0'; i++) {
+        switch (dna[i]) {
+            case 'A':
+                complementar[i] = 'T';
+                break;
+            case 'T':
+                complementar[i] = 'A';
+                break;
+            case 'C':
+                complementar[i] = 'G';
+                break;
+            case 'G':
+                complementar[i] = 'C';
+                break;
+            default:
+                complementar[i] = 'X'; // Caractere inválido caso haja um erro
+        }
+    }
+    complementar[tamanho] = '\0'; // Adicionando o caractere nulo no final do vetor complementar
+    
+    // Imprimindo o vetor complementar
+    printf("Vetor complementar: %s\n", complementar);
+    
+    return 0;
+}
+----------------------------------------------------------------------------------------------------------------
+11 execicio
+#include <stdio.h>
+
+// Função para ordenar o vetor de notas em ordem crescente
+void ordenarNotas(float notas[]) {
+    for (int i = 0; i < 4; i++) {
+        for (int j = i + 1; j < 5; j++) {
+            if (notas[i] > notas[j]) {
+                float temp = notas[i];
+                notas[i] = notas[j];
+                notas[j] = temp;
+            }
+        }
+    }
+}
+
+// Função para calcular a nota final do quesito
+float calcularNotaFinal(float notas[]) {
+    // Ordena as notas em ordem crescente
+    ordenarNotas(notas);
+    
+    // Calcula a soma das três notas centrais (índices 1, 2 e 3)
+    float somaNotas = notas[1] + notas[2] + notas[3];
+    
+    // Calcula a média dessas três notas
+    float notaFinal = somaNotas / 3.0;
+    
+    return notaFinal;
+}
+
+int main() {
+    // Vetor para armazenar as notas
+    float notas[5];
+    
+    // Lendo as notas da agremiação
+    printf("Digite as cinco notas recebidas pela agremiação (formato: 1.0 2.5 3.0 4.5 5.0): ");
+    scanf("%f %f %f %f %f", &notas[0], &notas[1], &notas[2], &notas[3], &notas[4]);
+    
+    // Calculando a nota final do quesito
+    float notaFinal = calcularNotaFinal(notas);
+    
+    // Imprimindo a nota final com uma casa decimal
+    printf("Nota final: %.1f\n", notaFinal);
+    
+    return 0;
+}
+-----------------------------------------------------------------------------------------------------------
+12 exercicio
+
+#include <stdio.h>
+
+int main() {
+    char encodedMessage[1001];
+    char decodedMessage[501]; // A mensagem decodificada terá no máximo metade do tamanho da codificada
+
+    printf("Digite a mensagem codificada na língua do P eletrônica de Jacy e Kátia:\n");
+    fgets(encodedMessage, sizeof(encodedMessage), stdin);
+
+    int decodedIndex = 0;
+    for (int i = 0; encodedMessage[i] != '\0'; i++) {
+        if (encodedMessage[i] == 'p' && encodedMessage[i + 1] != '\0') {
+            decodedMessage[decodedIndex] = encodedMessage[i + 1];
+            i++; // Pular a próxima letra após a letra 'p'
+        } else {
+            decodedMessage[decodedIndex] = encodedMessage[i];
+        }
+        decodedIndex++;
+    }
+    decodedMessage[decodedIndex] = '\0'; // Adicionar o caractere nulo de fim de string
+
+    printf("Mensagem decodificada:\n");
+    printf("%s\n", decodedMessage);
+
+    return 0;
+}
+
+-----------------------------------------------------------------------------------------------------------
+FIM
